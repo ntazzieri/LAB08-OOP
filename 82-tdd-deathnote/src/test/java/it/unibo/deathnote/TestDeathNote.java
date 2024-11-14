@@ -70,7 +70,7 @@ class TestDeathNote {
         assertTrue(deathNote.isNameWritten(HUMAN));
         assertFalse(deathNote.isNameWritten(HUMAN_NOT_TO_KILL));
         try {
-            deathNote.writeName("");
+            deathNote.writeName(null);
             fail();
         } catch (NullPointerException e) {
             checkEmptyString(e.getMessage());
@@ -79,7 +79,7 @@ class TestDeathNote {
 
 
     /*
-     * Only if the cause of death is written within the next 40 milliseconds of writing the person's name, it will happen.
+     * If the cause of death is written within the next 40 milliseconds of writing the person's name, it will happen.
       * - check that writing a cause of death before writing a name throws the correct exception
       * - write the name of a human in the notebook
       * - verify that the cause of death is a heart attack
@@ -108,7 +108,7 @@ class TestDeathNote {
     }
 
     /*
-     * Only if the cause of death is written within the next 6 seconds and 40 milliseconds of writing the death's details, it will happen.
+     * After writing the cause of death, details of the death should be written in the next 6 seconds and 40 milliseconds of writing the death's cause.
       * - check that writing the death details before writing a name throws the correct exception
       * - write the name of a human in the notebook
       * - verify that the details of the death are currently empty
@@ -131,9 +131,9 @@ class TestDeathNote {
         assertTrue(deathNote.getDeathDetails(HUMAN).isEmpty());
         assertTrue(deathNote.writeDetails(DEATH_DETAILS));
         assertEquals(DEATH_DETAILS, deathNote.getDeathDetails(HUMAN));
-        Thread.sleep(1000L);
+        Thread.sleep(6100L);
         assertFalse(deathNote.writeDetails(DEATH_DETAILS));
-        assertEquals(DEATH_DETAILS, deathNote.getDeathCause(HUMAN));
+        assertEquals(DEATH_DETAILS, deathNote.getDeathDetails(HUMAN));
     }
 
 
