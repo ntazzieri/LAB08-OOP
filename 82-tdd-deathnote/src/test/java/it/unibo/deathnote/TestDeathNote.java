@@ -123,7 +123,7 @@ class TestDeathNote {
     void testDeathDetails() throws InterruptedException {
         try {
             deathNote.writeDetails(DEATH_DETAILS);
-            fail("writeDetails permits to write the death details before writing a name");
+            fail("writeDetails() permits to write the death details before writing a name");
         } catch (IllegalStateException e) {
             checkEmptyString(e.getMessage());
         }

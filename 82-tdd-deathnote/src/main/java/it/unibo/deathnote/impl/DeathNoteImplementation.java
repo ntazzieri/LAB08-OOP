@@ -6,10 +6,13 @@ import java.util.Objects;
 
 import it.unibo.deathnote.api.DeathNote;
 
+/**
+ * An implementation of DeathNote
+ */
 public class DeathNoteImplementation implements DeathNote {
 
-    private static final long DETAILS_TIME_LIMIT = 6040L;
-    private static final long WRITING_TIME_LIMIT = 40L;
+    private static final long D_DETAILS_TIME_LIMIT = 6040L;
+    private static final long D_CAUSE_TIME_LIMIT = 40L;
     private final List<PersonToKill> names = new ArrayList<>();
 
     @Override
@@ -35,15 +38,11 @@ public class DeathNoteImplementation implements DeathNote {
         } else if(Objects.isNull(cause)) {
             throw new IllegalStateException("The cause is NULL");
         }
-        if(isTimePassed(names.getLast().writingTime, WRITING_TIME_LIMIT)) {
+        if(hasTimePassed(names.getLast().writingTime, D_CAUSE_TIME_LIMIT)) {
             return false;
         }
         names.getLast().deathCause = cause;
         return true;
-    }
-
-    private boolean isTimePassed(long oldTime, long timePassed) {
-        return System.currentTimeMillis() - oldTime > timePassed;
     }
 
     @Override
@@ -53,7 +52,7 @@ public class DeathNoteImplementation implements DeathNote {
         } else if (Objects.isNull(details)) {
             throw new IllegalStateException("The details are null");
         }
-        if(isTimePassed(names.getLast().writingTime, DETAILS_TIME_LIMIT)) {
+        if(hasTimePassed(names.getLast().writingTime, D_DETAILS_TIME_LIMIT)) {
             return false;
         }
         names.getLast().deathDetails = details;
@@ -88,6 +87,10 @@ public class DeathNoteImplementation implements DeathNote {
             }
         }
         return null;
+    }
+
+    private boolean hasTimePassed(long oldTime, long timePassed) {
+        return System.currentTimeMillis() - oldTime > timePassed;
     }
 
     private static class PersonToKill {
