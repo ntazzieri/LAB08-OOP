@@ -43,7 +43,7 @@ public final class DrawNumberControllerImpl implements DrawNumberController {
         if(views.isEmpty()) {
             throw new IllegalStateException("There is no view attached!");
         }
-        for (DrawNumberView view : views) {
+        for (final DrawNumberView view : views) {
             view.result(model.attempt(n));    
         }
     }

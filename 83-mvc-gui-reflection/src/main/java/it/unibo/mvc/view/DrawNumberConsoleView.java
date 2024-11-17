@@ -14,13 +14,13 @@ public class DrawNumberConsoleView implements DrawNumberView {
      * NOTE: It doesn't attach any controller since this view is output only
      */
     @Override
-    public void setController(DrawNumberController observer) { }
+    public void setController(final DrawNumberController observer) { }
 
     @Override
     public void start() { }
 
     @Override
-    public void result(DrawResult res) {
+    public void result(final DrawResult res) {
         switch (res) {
             case YOURS_HIGH, YOURS_LOW -> {
                 System.out.println(res.getDescription());

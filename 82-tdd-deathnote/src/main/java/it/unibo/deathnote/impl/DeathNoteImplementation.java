@@ -16,7 +16,7 @@ public class DeathNoteImplementation implements DeathNote {
     private final List<PersonToKill> names = new ArrayList<>();
 
     @Override
-    public String getRule(int ruleNumber) {
+    public String getRule(final int ruleNumber) {
         if(ruleNumber < 1 || ruleNumber >= DeathNote.RULES.size()) {
             throw new IllegalArgumentException("ruleNumber " + ruleNumber + " does not exist");
         }
@@ -24,7 +24,7 @@ public class DeathNoteImplementation implements DeathNote {
     }
 
     @Override
-    public void writeName(String name) {
+    public void writeName(final String name) {
         if(Objects.isNull(name)) {
             throw new NullPointerException("The given name is null");
         }
@@ -34,7 +34,7 @@ public class DeathNoteImplementation implements DeathNote {
     }
 
     @Override
-    public boolean writeDeathCause(String cause) {
+    public boolean writeDeathCause(final String cause) {
         if(names.isEmpty()) {
             throw new IllegalStateException("There's no name written in this deathNote");
         } else if(Objects.isNull(cause)) {
@@ -48,7 +48,7 @@ public class DeathNoteImplementation implements DeathNote {
     }
 
     @Override
-    public boolean writeDetails(String details) {
+    public boolean writeDetails(final String details) {
         if(names.isEmpty()) {
             throw new IllegalStateException("There's no name written in this deathNote");
         } else if (Objects.isNull(details)) {
@@ -62,7 +62,7 @@ public class DeathNoteImplementation implements DeathNote {
     }
 
     @Override
-    public String getDeathCause(String name) {
+    public String getDeathCause(final String name) {
         if(!isNameWritten(name)) {
             throw new IllegalArgumentException(name + " is not written in this death note");
         }
@@ -70,7 +70,7 @@ public class DeathNoteImplementation implements DeathNote {
     }
 
     @Override
-    public String getDeathDetails(String name) {
+    public String getDeathDetails(final String name) {
         if(!isNameWritten(name)) {
             throw new IllegalArgumentException(name + " is not written in this death note");
         }
@@ -78,12 +78,12 @@ public class DeathNoteImplementation implements DeathNote {
     }
 
     @Override
-    public boolean isNameWritten(String name) {
+    public boolean isNameWritten(final String name) {
         return Objects.nonNull(getPersonToKill(name));
     }
 
-    private PersonToKill getPersonToKill(String name) {
-        for(PersonToKill person : names) {
+    private PersonToKill getPersonToKill(final String name) {
+        for(final PersonToKill person : names) {
             if(person.name == name) {
                 return person;
             }
@@ -91,7 +91,7 @@ public class DeathNoteImplementation implements DeathNote {
         return null;
     }
 
-    private boolean hasTimePassed(long oldTime, long timePassed) {
+    private boolean hasTimePassed(final long oldTime, final long timePassed) {
         return System.currentTimeMillis() - oldTime > timePassed;
     }
 
@@ -101,7 +101,7 @@ public class DeathNoteImplementation implements DeathNote {
         private String deathCause;
         private String deathDetails;
         
-        PersonToKill(String name) {
+        PersonToKill(final String name) {
             this.name = name;
             writingTime = System.currentTimeMillis();
             deathCause = "heart attack";

@@ -33,13 +33,13 @@ class TestDeathNote {
         try{
             deathNote.getRule(0);
             fail("Rule number 0 is possible");
-        }catch(IllegalArgumentException e) { 
+        }catch(final IllegalArgumentException e) { 
             checkEmptyString(e.getMessage());
         }
         try {
             deathNote.getRule(-10);
             fail("Negative rule is possible");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             checkEmptyString(e.getMessage());
         }
     }
@@ -50,7 +50,7 @@ class TestDeathNote {
      */
     @Test
     void testNotEmptyOrNullRule() {
-        for (String rule : DeathNote.RULES) {
+        for (final String rule : DeathNote.RULES) {
             checkEmptyString(rule);
         }
     }
@@ -74,7 +74,7 @@ class TestDeathNote {
         try {
             deathNote.writeName(null);
             fail("A null name is writable");
-        } catch (NullPointerException e) {
+        } catch (final NullPointerException e) {
             checkEmptyString(e.getMessage());
         }
     }
@@ -97,7 +97,7 @@ class TestDeathNote {
         try {
             deathNote.writeDeathCause(CAUSE_OF_DEATH);
             fail("writeDeathCause() permits to write a death cause before writing a name");
-        } catch (IllegalStateException e) {
+        } catch (final IllegalStateException e) {
             checkEmptyString(e.getMessage());
         }
         deathNote.writeName(HUMAN);
@@ -126,7 +126,7 @@ class TestDeathNote {
         try {
             deathNote.writeDetails(DEATH_DETAILS);
             fail("writeDetails() permits to write the death details before writing a name");
-        } catch (IllegalStateException e) {
+        } catch (final IllegalStateException e) {
             checkEmptyString(e.getMessage());
         }
         deathNote.writeName(HUMAN);
@@ -139,7 +139,7 @@ class TestDeathNote {
     }
 
 
-    private void checkEmptyString(String str) {
+    private void checkEmptyString(final String str) {
         assertNotNull(str);
         assertFalse(str.isEmpty());
         assertFalse(str.isBlank());
