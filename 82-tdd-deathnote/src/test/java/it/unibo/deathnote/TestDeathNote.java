@@ -69,9 +69,11 @@ class TestDeathNote {
         deathNote.writeName(HUMAN);
         assertTrue(deathNote.isNameWritten(HUMAN));
         assertFalse(deathNote.isNameWritten(HUMAN_NOT_TO_KILL));
+        deathNote.writeName("");
+        assertFalse(deathNote.isNameWritten(""));
         try {
             deathNote.writeName(null);
-            fail();
+            fail("A null name is writable");
         } catch (NullPointerException e) {
             checkEmptyString(e.getMessage());
         }

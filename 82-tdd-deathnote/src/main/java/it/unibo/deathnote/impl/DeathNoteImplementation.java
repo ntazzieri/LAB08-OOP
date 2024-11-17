@@ -28,7 +28,9 @@ public class DeathNoteImplementation implements DeathNote {
         if(Objects.isNull(name)) {
             throw new NullPointerException("The given name is null");
         }
-        this.names.add(new PersonToKill(name));
+        if(!name.isEmpty() && !name.isBlank()) {
+            this.names.add(new PersonToKill(name));
+        }
     }
 
     @Override
